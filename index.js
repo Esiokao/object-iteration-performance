@@ -1,4 +1,4 @@
-// 3 diff length of object : 1k, 10k, 100k, 1000k;
+// 4 diff length of object : 1k, 10k, 100k, 1000k;
 console.log('------------------------');
 const obj1 = {};
 const obj10 = {};
@@ -11,8 +11,6 @@ for (let i = 0; i < 1000000; i += 1) {
   if (i < 10000) obj10[i] = 1;
   if (i < 1000) obj1[i] = 1;
 }
-
-// 4 diff way to iterate a object
 
 // 1. for-loop
 const forLoop = obj => {
@@ -130,4 +128,19 @@ entries(obj1);
 entries(obj10);
 entries(obj100);
 entries(obj1000);
+console.log('------------------------');
+// 8.Object.fromEntries
+
+const fromEntries = obj => {
+  const _length = Object.keys(obj).length ?? 0;
+
+  console.time(`fromEntries-${_length}`);
+  const newObj = Object.fromEntries(Object.entries(obj));
+  console.timeEnd(`fromEntries-${_length}`);
+};
+
+fromEntries(obj1);
+fromEntries(obj10);
+fromEntries(obj100);
+fromEntries(obj1000);
 console.log('------------------------');
