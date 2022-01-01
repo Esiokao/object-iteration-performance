@@ -4,10 +4,6 @@ const obj1 = {};
 const obj10 = {};
 const obj100 = {};
 const obj1000 = {};
-const _obj1 = {};
-const _obj10 = {};
-const _obj100 = {};
-const _obj1000 = {};
 
 for (let i = 0; i < 1000000; i += 1) {
   obj1000[i] = 1;
