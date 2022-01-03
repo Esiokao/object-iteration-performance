@@ -12,13 +12,6 @@ for (let i = 0; i < 1000000; i += 1) {
   if (i < 1000) obj1[i] = 1;
 }
 
-const toBeTest = [obj1, obj10, obj100, obj1000];
-const test = (testFunc, testArgs = toBeTest, ...args) => {
-  testArgs.forEach(testArg => {
-    testFunc(testArg);
-  });
-};
-
 // 1. for-loop
 const forLoop = obj => {
   const _length = Object.keys(obj).length ?? 0;
@@ -30,9 +23,6 @@ const forLoop = obj => {
   console.timeEnd(`for-loop-${_length}`);
 };
 
-test(forLoop);
-
-console.log('------------------------');
 // 2. for-of
 const forOf = obj => {
   const _length = Object.keys(obj).length ?? 0;
@@ -44,8 +34,6 @@ const forOf = obj => {
   console.timeEnd(`for-of-${_length}`);
 };
 
-test(forOf);
-console.log('------------------------');
 // 3. for-in
 const forIn = obj => {
   const _length = Object.keys(obj).length ?? 0;
@@ -56,8 +44,7 @@ const forIn = obj => {
   }
   console.timeEnd(`for-in-${_length}`);
 };
-test(forIn);
-console.log('------------------------');
+
 // 4. while-loop
 
 const whileLoop = obj => {
@@ -71,8 +58,7 @@ const whileLoop = obj => {
   }
   console.timeEnd(`while-loop-${_length}`);
 };
-test(whileLoop);
-console.log('------------------------');
+
 // 5. Object.keys().foreach()
 
 const keys = obj => {
@@ -85,9 +71,6 @@ const keys = obj => {
   console.timeEnd(`keys-forEach-${_length}`);
 };
 
-test(keys);
-console.log('------------------------');
-
 // 6. ES6 seperator
 
 const spread = obj => {
@@ -96,8 +79,6 @@ const spread = obj => {
   const newObj = { ...obj };
   console.timeEnd(`spread -${_length}`);
 };
-test(spread);
-console.log('------------------------');
 
 // 7. for-of with entries
 
@@ -111,8 +92,6 @@ const entries = obj => {
   console.timeEnd(`entries -${_length}`);
 };
 
-test(entries);
-console.log('------------------------');
 // 8.Object.fromEntries
 
 const fromEntries = obj => {
@@ -123,5 +102,14 @@ const fromEntries = obj => {
   console.timeEnd(`fromEntries-${_length}`);
 };
 
-test(fromEntries);
-console.log('------------------------');
+const testObjects = [obj1, obj10, obj100, obj1000];
+const testFuncs = [forLoop, forOf, forIn, whileLoop, keys, spread, entries, fromEntries];
+const test = (testFuncs = testFuncs, testArgs = testObjects, ...args) => {
+  testFuncs.forEach(testFunc => {
+    testArgs.forEach(testArg => {
+      testFunc(testArg);
+    });
+    console.log('------------------------------');
+  });
+};
+test(testFuncs, testObjects);
