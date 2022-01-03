@@ -1,5 +1,4 @@
 // 4 diff length of object : 1k, 10k, 100k, 1000k;
-console.log('------------------------');
 const obj1 = {};
 const obj10 = {};
 const obj100 = {};
@@ -22,7 +21,7 @@ const forLoop = obj => {
   }
   console.timeEnd(`for-loop-${_length}`);
 };
-
+forLoop.name;
 // 2. for-of
 const forOf = obj => {
   const _length = Object.keys(obj).length ?? 0;
@@ -104,7 +103,8 @@ const fromEntries = obj => {
 
 const testObjects = [obj1, obj10, obj100, obj1000];
 const testFuncs = [forLoop, forOf, forIn, whileLoop, keys, spread, entries, fromEntries];
-const test = (testFuncs = testFuncs, testArgs = testObjects, ...args) => {
+const test = (testFuncs, testArgs, ...args) => {
+  console.log('------------------------------');
   testFuncs.forEach(testFunc => {
     testArgs.forEach(testArg => {
       testFunc(testArg);
