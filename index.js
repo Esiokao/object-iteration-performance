@@ -12,6 +12,13 @@ for (let i = 0; i < 1000000; i += 1) {
   if (i < 1000) obj1[i] = 1;
 }
 
+const toBeTest = [obj1, obj10, obj100, obj1000];
+const test = (testFunc, testArgs = toBeTest, ...args) => {
+  testArgs.forEach(testArg => {
+    testFunc(testArg);
+  });
+};
+
 // 1. for-loop
 const forLoop = obj => {
   const _length = Object.keys(obj).length ?? 0;
@@ -23,10 +30,7 @@ const forLoop = obj => {
   console.timeEnd(`for-loop-${_length}`);
 };
 
-forLoop(obj1);
-forLoop(obj10);
-forLoop(obj100);
-forLoop(obj1000);
+test(forLoop);
 
 console.log('------------------------');
 // 2. for-of
@@ -40,10 +44,7 @@ const forOf = obj => {
   console.timeEnd(`for-of-${_length}`);
 };
 
-forOf(obj1);
-forOf(obj10);
-forOf(obj100);
-forOf(obj1000);
+test(forOf);
 console.log('------------------------');
 // 3. for-in
 const forIn = obj => {
@@ -55,10 +56,7 @@ const forIn = obj => {
   }
   console.timeEnd(`for-in-${_length}`);
 };
-forIn(obj1);
-forIn(obj10);
-forIn(obj100);
-forIn(obj1000);
+test(forIn);
 console.log('------------------------');
 // 4. while-loop
 
@@ -73,11 +71,7 @@ const whileLoop = obj => {
   }
   console.timeEnd(`while-loop-${_length}`);
 };
-
-whileLoop(obj1);
-whileLoop(obj10);
-whileLoop(obj100);
-whileLoop(obj1000);
+test(whileLoop);
 console.log('------------------------');
 // 5. Object.keys().foreach()
 
@@ -91,10 +85,7 @@ const keys = obj => {
   console.timeEnd(`keys-forEach-${_length}`);
 };
 
-keys(obj1);
-keys(obj10);
-keys(obj100);
-keys(obj1000);
+test(keys);
 console.log('------------------------');
 
 // 6. ES6 seperator
@@ -105,11 +96,7 @@ const spread = obj => {
   const newObj = { ...obj };
   console.timeEnd(`spread -${_length}`);
 };
-
-spread(obj1);
-spread(obj10);
-spread(obj100);
-spread(obj1000);
+test(spread);
 console.log('------------------------');
 
 // 7. for-of with entries
@@ -124,10 +111,7 @@ const entries = obj => {
   console.timeEnd(`entries -${_length}`);
 };
 
-entries(obj1);
-entries(obj10);
-entries(obj100);
-entries(obj1000);
+test(entries);
 console.log('------------------------');
 // 8.Object.fromEntries
 
@@ -139,8 +123,5 @@ const fromEntries = obj => {
   console.timeEnd(`fromEntries-${_length}`);
 };
 
-fromEntries(obj1);
-fromEntries(obj10);
-fromEntries(obj100);
-fromEntries(obj1000);
+test(fromEntries);
 console.log('------------------------');
